@@ -165,14 +165,16 @@ class _SliderDetailSheetState extends State<SliderDetailSheet> {
               
               const SizedBox(height: 10),
               
-              // Descripción
+              // Descripción (Si la descripción está vacía, usamos el summary como fallback)
               Text(
-                widget.slide.description,
+                widget.slide.description.isNotEmpty 
+                    ? widget.slide.description 
+                    : widget.slide.summary,
                 style: const TextStyle(
-                  fontSize: 15,
+                  fontSize: 16,
                   color: Color(0xFF677B92),
-                  height: 1.4,
-                  fontWeight: FontWeight.w500,
+                  height: 1.5,
+                  fontWeight: FontWeight.w400,
                 ),
               ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05, end: 0),
             ],

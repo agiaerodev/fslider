@@ -114,7 +114,7 @@ class SliderCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      slide.description,
+                      slide.summary,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Color(0xFF677B92),
