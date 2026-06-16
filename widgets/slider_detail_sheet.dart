@@ -17,7 +17,6 @@ class _SliderDetailSheetState extends State<SliderDetailSheet> {
   @override
   void initState() {
     super.initState();
-    // Simulamos un pequeño retraso para mostrar el esqueleto como se pidió
     Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) {
         setState(() {
