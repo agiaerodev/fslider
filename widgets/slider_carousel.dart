@@ -4,8 +4,27 @@ import '../providers/sliders_provider.dart';
 import 'slider_card.dart';
 import 'slider_skeleton.dart';
 
-class SliderCarousel extends StatelessWidget {
-  const SliderCarousel({super.key});
+class SliderCarousel extends StatefulWidget {
+  final int? sliderId;
+
+  const SliderCarousel({super.key, this.sliderId});
+
+  @override
+  State<SliderCarousel> createState() => _SliderCarouselState();
+}
+
+class _SliderCarouselState extends State<SliderCarousel> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.sliderId != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          context.read<SlidersProvider>().loadSlider(widget.sliderId!);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +49,7 @@ class SliderCarousel extends StatelessWidget {
         }
 
         if (slides.isEmpty) {
-          // Si no está cargando y sigue vacío, mostramos un placeholder o nada
-          if (provider.isLoading) return const SizedBox.shrink(); // Ya manejado arriba pero por seguridad
+          if (provider.isLoading) return const SizedBox.shrink();
           
           return Container(
             height: 100,
@@ -59,10 +77,10 @@ class SliderCarousel extends StatelessWidget {
               ),
             ),
             if (provider.isLoading)
-              Positioned(
+              const Positioned(
                 top: 0,
                 right: 0,
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.all(8.0),
                   child: SizedBox(
                     width: 15,

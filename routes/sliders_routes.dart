@@ -4,7 +4,12 @@ import 'sliders_route_names.dart';
 
 final slidersRoutes = [
   GoRoute(
-    path: SlidersRouteNames.seeAll,
-    builder: (context, state) => const SeeAllView(),
+    path: SlidersRouteNames.seeAllPath,
+    builder: (context, state) {
+      final extra = state.extra as Map<String, dynamic>?;
+      final sliderId = extra?['sliderId'] as int? ?? 0;
+      final title = extra?['title'] as String? ?? '';
+      return SeeAllView(sliderId: sliderId, title: title);
+    },
   ),
 ];

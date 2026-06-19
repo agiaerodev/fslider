@@ -10,8 +10,8 @@ class SeeAllView extends StatefulWidget {
 
   const SeeAllView({
     super.key,
-    this.sliderId = 2,
-    this.title = 'Benefits of being an agent',
+    this.sliderId = 0,
+    this.title = '',
   });
 
   @override
