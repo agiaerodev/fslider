@@ -7,14 +7,12 @@ class SliderSection extends StatelessWidget {
   final String title;
   final bool isDark;
   final int sliderId;
-  final VoidCallback? onViewAll;
 
   const SliderSection({
     super.key,
     required this.title,
     required this.sliderId,
     this.isDark = true,
-    this.onViewAll,
   });
 
   @override
@@ -39,11 +37,10 @@ class SliderSection extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             TextButton(
-              onPressed: onViewAll ??
-                  () => context.push(
-                        SlidersRouteNames.seeAllPath,
-                        extra: {'sliderId': sliderId, 'title': title},
-                      ),
+              onPressed: () => context.push(
+                SlidersRouteNames.seeAllPath,
+                extra: {'sliderId': sliderId, 'title': title},
+              ),
               child: Text(
                 'View All',
                 style: TextStyle(
