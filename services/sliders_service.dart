@@ -4,16 +4,17 @@ import '../models/slider_model.dart';
 class SlidersService extends BaseApiService {
   static const String _route = '/slider/v1/sliders';
 
-  Future<SliderModel?> getSlider(int id, {bool refresh = false}) async {
+  Future<SliderModel?> getSlider(String systemName, {bool refresh = false}) async {
     try {
       final config = {
         'refresh': refresh,
         'params': {
           'include': 'slides.files',
+          'filter': {'field': 'system_name'}
         },
       };
 
-      final response = await show(_route, id, config);
+      final response = await show(_route, systemName, config);
       
       if (response == null) return null;
 
@@ -28,7 +29,7 @@ class SlidersService extends BaseApiService {
         if (data.isEmpty) return null;
         // Buscamos el slider por id si es una lista
         final item = data.firstWhere(
-          (element) => element['id']?.toString() == id.toString(),
+          (element) => element['systemName']?.toString() == systemName,
           orElse: () => data.first,
         );
         data = item;

@@ -11,15 +11,15 @@ class SlidersProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  Future<void> loadSlider(int id, {bool refresh = false}) async {
+  Future<void> loadSlider(String systemName, {bool refresh = false}) async {
     if (_isLoading) return;
     
     _isLoading = true;
     notifyListeners();
 
     try {
-      debugPrint('🚀 SlidersProvider: Loading slider $id (refresh: $refresh)');
-      final result = await _services.getSlider(id, refresh: refresh);
+      debugPrint('🚀 SlidersProvider: Loading slider $systemName (refresh: $refresh)');
+      final result = await _services.getSlider(systemName, refresh: refresh);
       if (result != null) {
         _slider = result;
       }

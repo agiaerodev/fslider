@@ -5,9 +5,9 @@ import 'slider_card.dart';
 import 'slider_skeleton.dart';
 
 class SliderCarousel extends StatefulWidget {
-  final int? sliderId;
+  final String? systemName;
 
-  const SliderCarousel({super.key, this.sliderId});
+  const SliderCarousel({super.key, this.systemName});
 
   @override
   State<SliderCarousel> createState() => _SliderCarouselState();
@@ -17,10 +17,10 @@ class _SliderCarouselState extends State<SliderCarousel> {
   @override
   void initState() {
     super.initState();
-    if (widget.sliderId != null) {
+    if (widget.systemName != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) {
-          context.read<SlidersProvider>().loadSlider(widget.sliderId!);
+          context.read<SlidersProvider>().loadSlider(widget.systemName!);
         }
       });
     }

@@ -35,12 +35,14 @@ class SlideModel {
 class SliderModel {
   final int id;
   final String name;
+  final String systemName;
   final List<SlideModel> slides;
 
   SliderModel({
     required this.id,
     required this.name,
     required this.slides,
+    required this.systemName
   });
 
   factory SliderModel.fromJson(Map<String, dynamic> json) {
@@ -57,6 +59,7 @@ class SliderModel {
     return SliderModel(
       id: int.tryParse(json['id']?.toString() ?? '0') ?? 0,
       name: (json['name'] ?? '').toString(),
+      systemName: (json['systemName'] ?? '').toString(),
       slides: parsedSlides,
     );
   }

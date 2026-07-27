@@ -7,9 +7,9 @@ final slidersRoutes = [
     path: SlidersRouteNames.seeAllPath,
     builder: (context, state) {
       final extra = state.extra as Map<String, dynamic>?;
-      final sliderId = extra?['sliderId'] as int? ?? 0;
+      final systemName = extra?['systemName'] as String? ?? '';
       final title = extra?['title'] as String? ?? '';
-      return SeeAllView(sliderId: sliderId, title: title);
+      return SeeAllView(systemName: systemName, title: title);
     },
   ),
 ];

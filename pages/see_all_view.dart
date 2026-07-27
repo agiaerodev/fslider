@@ -5,12 +5,12 @@ import '../widgets/slider_card.dart';
 import '../widgets/slider_skeleton.dart';
 
 class SeeAllView extends StatefulWidget {
-  final int sliderId;
+  final String systemName;
   final String title;
 
   const SeeAllView({
     super.key,
-    this.sliderId = 0,
+    this.systemName = '',
     this.title = '',
   });
 
@@ -26,8 +26,8 @@ class _SeeAllViewState extends State<SeeAllView> {
       if (mounted) {
         final provider = context.read<SlidersProvider>();
         // Solo cargamos si no hay datos o es un slider diferente
-        if (provider.slider == null || provider.slider!.id != widget.sliderId) {
-          provider.loadSlider(widget.sliderId);
+        if (provider.slider == null || provider.slider!.systemName != widget.systemName) {
+          provider.loadSlider(widget.systemName);
         }
       }
     });

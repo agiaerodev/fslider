@@ -6,12 +6,12 @@ import 'slider_carousel.dart';
 class SliderSection extends StatelessWidget {
   final String title;
   final bool isDark;
-  final int sliderId;
+  final String systemName;
 
   const SliderSection({
     super.key,
     required this.title,
-    required this.sliderId,
+    required this.systemName,
     this.isDark = true,
   });
 
@@ -39,7 +39,7 @@ class SliderSection extends StatelessWidget {
             TextButton(
               onPressed: () => context.push(
                 SlidersRouteNames.seeAllPath,
-                extra: {'sliderId': sliderId, 'title': title},
+                extra: {'systemName': systemName, 'title': title},
               ),
               child: Text(
                 'View All',
@@ -51,7 +51,7 @@ class SliderSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 15),
-        SliderCarousel(sliderId: sliderId),
+        SliderCarousel(systemName: systemName),
       ],
     );
   }
