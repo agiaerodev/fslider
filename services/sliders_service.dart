@@ -5,6 +5,7 @@ class SlidersService extends BaseApiService {
   static const String _route = '/slider/v1/sliders';
 
   Future<SliderModel?> getSlider(String systemName, {bool refresh = false}) async {
+    print('🚀 SlidersService: Loading slider $systemName (refresh: $refresh)');
     try {
       final config = {
         'refresh': refresh,
