@@ -11,7 +11,7 @@ class SlidersService extends BaseApiService {
         'refresh': refresh,
         'params': {
           'include': 'slides.files',
-          'filter': {'field': 'system_name'}
+          'filter': {'field': 'system_name', 'order':{'sortOrder':"asc"}}
         },
       };
 
