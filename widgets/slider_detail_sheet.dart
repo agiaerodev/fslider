@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../models/slider_model.dart';
 
 class SliderDetailSheet extends StatefulWidget {
@@ -118,6 +119,11 @@ class _SliderDetailSheetState extends State<SliderDetailSheet> {
   }
 
   Widget _buildContent() {
+    final description = widget.slide.description.isNotEmpty
+        ? widget.slide.description
+        : widget.slide.summary;
+    final hasHtmlContent = _containsHtml(description);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -142,9 +148,9 @@ class _SliderDetailSheetState extends State<SliderDetailSheet> {
             ),
           ),
         ).animate().fadeIn(duration: 400.ms).scale(begin: const Offset(0.98, 0.98)),
-        
+
         const SizedBox(height: 20),
-        
+
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
@@ -161,25 +167,53 @@ class _SliderDetailSheetState extends State<SliderDetailSheet> {
                   height: 1.1,
                 ),
               ).animate().fadeIn(delay: 150.ms).slideY(begin: 0.1, end: 0),
-              
+
               const SizedBox(height: 10),
-              
+
               // Descripción (Si la descripción está vacía, usamos el summary como fallback)
-              Text(
-                widget.slide.description.isNotEmpty 
-                    ? widget.slide.description 
-                    : widget.slide.summary,
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF677B92),
-                  height: 1.5,
-                  fontWeight: FontWeight.w400,
-                ),
-              ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05, end: 0),
+              hasHtmlContent
+                  ? Html(
+                      data: description,
+                      style: {
+                        'html': Style(
+                          margin: Margins.zero,
+                          padding: HtmlPaddings.zero,
+                        ),
+                        'body': Style(
+                          margin: Margins.zero,
+                          padding: HtmlPaddings.zero,
+                          fontSize: FontSize(16),
+                          color: const Color(0xFF677B92),
+                          lineHeight: const LineHeight(1.5),
+                        ),
+                        'p': Style(
+                          margin: Margins.only(bottom: 12),
+                          padding: HtmlPaddings.zero,
+                          fontSize: FontSize(16),
+                          color: const Color(0xFF677B92),
+                          lineHeight: const LineHeight(1.5),
+                        ),
+                        'strong': Style(fontWeight: FontWeight.w700),
+                        'a': Style(color: const Color(0xFF2E7DFF)),
+                      },
+                    ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05, end: 0)
+                  : Text(
+                      description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF677B92),
+                        height: 1.5,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.05, end: 0),
             ],
           ),
         ),
       ],
     );
+  }
+
+  bool _containsHtml(String value) {
+    return value.contains('<') && value.contains('>');
   }
 }

@@ -14,18 +14,10 @@ class SlideModel {
   });
 
   factory SlideModel.fromJson(Map<String, dynamic> json) {
-    final rawDescription = (json['description'] ?? '').toString();
-    final cleanDescription = rawDescription
-        .replaceAll(RegExp(r'<[^>]*>'), '')
-        .replaceAll('&#39;', "'")
-        .replaceAll('&amp;', '&')
-        .replaceAll(RegExp(r'\s+'), ' ')
-        .trim();
-
     return SlideModel(
       id: int.tryParse(json['id']?.toString() ?? '0') ?? 0,
       title: (json['title'] ?? '').toString(),
-      description: cleanDescription,
+      description: (json['description'] ?? '').toString(),
       summary: (json['summary'] ?? '').toString(),
       imageUrl: (json['mainimageUrl'] ?? '').toString(),
     );
